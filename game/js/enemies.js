@@ -1,5 +1,7 @@
 export const enemies = [];
 const SIZE = 26;
+const enemyImage = new Image();
+enemyImage.src = "https://w7.pngwing.com/pngs/334/689/png-transparent-dragon-quest-monsters-joker-2-dragon-quest-ix-dragon-quest-xi-dragon-quest-ii-slime-video-game-smiley-dragon-quest-thumbnail.png";
 
 function pushEnemy(canvas) {
     const w = SIZE;
@@ -12,7 +14,7 @@ function pushEnemy(canvas) {
 }
 
 export function spawnEnemy(canvas) {
-    if (enemies.length < 5) {
+    if (enemies.length < 200) {
         pushEnemy(canvas);
     }
 }
@@ -30,6 +32,6 @@ export function updateEnemies(canvas) {
 export function drawEnemies(ctx) {
     ctx.fillStyle = "crimson";
     for (const e of enemies) {
-        ctx.fillRect(e.x, e.y, e.width, e.height);
+        ctx.drawImage(enemyImage, e.x, e.y, e.width, e.height);
     }
 }

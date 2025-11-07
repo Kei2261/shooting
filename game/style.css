@@ -14,3 +14,9 @@ body {
   box-shadow: 0 4px 24px rgba(0,0,0,0.3);
   display: block;
 }
+
+#lifeBoard, #ScoreBoard {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  font-size: 20px;
+}
