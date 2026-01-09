@@ -1,5 +1,5 @@
 import { player, initPlayer, drawPlayer } from "./player.js";
-import { spawnEnemy, enemies, updateEnemies, drawEnemies} from "./enemies.js";
+import { spawnEnemy, enemies, updateEnemies, drawEnemies } from "./enemies.js";
 import { handleCollisions } from "./collision.js";
 
 const canvas = document.getElementById("gameCanvas");
@@ -16,11 +16,27 @@ function tryShoot() {
         y: player.y - 5,
         width: 5,
         height: 5,
+        vx: 0,
+        vy: BULLET_SPEED,
+    }, {
+        x: player.x + 13,
+        y: player.y - 5,
+        width: 5,
+        height: 5,
+        vx: 1,
+        vy: BULLET_SPEED,
+    }, {
+        x: player.x + 13,
+        y: player.y - 5,
+        width: 5,
+        height: 5,
+        vx: -1,
         vy: BULLET_SPEED,
     })
 }
 
-function updateScore(){
+
+function updateScore() {
     const ScoreBoard = document.getElementById("ScoreBoard");
     ScoreBoard.innerText = `Score: ${player.score}`;
     lifeBoard.innerText = `Life: ${player.life}`;
@@ -36,6 +52,14 @@ window.addEventListener("keydown", (e) => {
         if (player.x < canvas.width - player.width - 10) {
             player.x += 10;
         }
+    } else if (e.key === "ArrowUp") {
+        if (player.x < canvas.width - player.width - 10) {
+            player.y -= 10;
+        }
+    } else if (e.key === "ArrowDown") {
+        if (player.x < canvas.width - player.width - 10) {
+            player.y += 10;
+        }
     } else if (e.code === "Space") {
         tryShoot();
     }
@@ -45,6 +69,7 @@ function update() {
     for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         bullet.y += bullet.vy;
+        bullet.x += bullet.vx;
         if (bullet.y < 0) {
             bullets.splice(i, 1);
         }
